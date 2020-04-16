@@ -22,6 +22,7 @@ def rock_paper_scissors(n):
 			else:
 				permutations.append(list(map(lambda xs: [rps[i]] + xs, rock_paper_scissors(n - 1))))
 
+		#remove duplicates	
 		cache = []
 		for xs in permutations:
 			if xs in cache:
