@@ -22,7 +22,14 @@ def rock_paper_scissors(n):
 			else:
 				permutations.append(list(map(lambda xs: [rps[i]] + xs, rock_paper_scissors(n - 1))))
 
-		return flatten(permutations)
+		cache = []
+		for xs in permutations:
+			if xs in cache:
+				continue	
+			else:
+				 cache.append(xs)
+
+		return flatten(cache)
 
 		
 
