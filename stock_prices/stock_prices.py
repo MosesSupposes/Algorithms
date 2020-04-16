@@ -5,23 +5,17 @@ from functools import reduce
 
 
 def find_max_profit(prices):
+	def reducer(acc, cur):
+		starting_point = prices.index(cur) + 1 
+		available_prices = prices[starting_point: len(prices)] 
 
-	# Reducer
-	def find_max_and_min(acc, cur):
-		print("cur:", cur, "acc[min]:", acc["min"])
-		if cur < acc["min"]:
-			acc["min"] = cur
-
-		if cur > acc["max"]: 
-			acc["max"] = cur
-
+		# this if guard prevents an index out of range error
+		if starting_point != len(prices):
+			acc.append(max(available_prices) - cur)
+			
 		return acc
 
-	min_and_max_prices = reduce(find_max_and_min, prices, {"max": 0, "min": 100000000000000000})
-	print(min_and_max_prices)
-
-	return min_and_max_prices["max"] - min_and_max_prices["min"]
-	
+	return max(reduce(reducer, prices, []))
 
 
 if __name__ == '__main__':
